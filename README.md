@@ -7,6 +7,7 @@ It installs additional testing libraries:
 - @testing-library/cypress
 - cypress-file-upload
 - axios
+- luxon
 
 Your also have an env variable named `CYPRESS_CI` set to `1`.
 
