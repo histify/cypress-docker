@@ -3,7 +3,7 @@
 set -o errexit
 
 RECORD=""
-if [[ "$CYPRESS_RECORD_KEY" -ne "" ]]; then
+if [[ "$CYPRESS_RECORD_KEY" != "" ]]; then
     RECORD=" --record"
 fi
 
