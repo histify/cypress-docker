@@ -1,5 +1,6 @@
-FROM cypress/included:8.5.0
+FROM cypress/included:10.3.1
 
+WORKDIR /app
 RUN npm install @4tw/cypress-drag-drop @testing-library/cypress cypress-file-upload axios luxon
 
 ENV CYPRESS_CI=1
