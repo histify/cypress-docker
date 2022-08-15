@@ -8,7 +8,7 @@ if [[ "$CYPRESS_RECORD_KEY" != "" ]]; then
 fi
 
 if [[ $# -eq 0 ]]; then
-    cypress run -q $RECORD
+    gosu cypress cypress run -q $RECORD
 else
-    eval "$@"
+    gosu cypress eval "$@"
 fi
