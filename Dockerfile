@@ -9,10 +9,12 @@ RUN npm install @4tw/cypress-drag-drop @testing-library/cypress cypress-file-upl
 
 RUN addgroup --system cypress \
     && adduser --system --ingroup cypress cypress
+RUN mkdir -p /app/test
 
 ENV CYPRESS_CI=1
 ENV LC_ALL="de_CH.UTF-8"
 ENV TZ=Europe/Zurich
 
 COPY entrypoint.sh /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
