@@ -9,7 +9,7 @@ It installs additional testing libraries:
 - axios
 - luxon
 
-Your also have an env variable named `CYPRESS_CI` set to `1`.
+You also have an env variable named `CYPRESS_CI` set to `1`.
 
 ## entrypoint
 
