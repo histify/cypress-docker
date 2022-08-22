@@ -38,6 +38,8 @@ services:
       - COMMIT_INFO_SHA
       - COMMIT_INFO_AUTHOR
       - COMMIT_INFO_EMAIL
+    volumes:
+      - ./:/app/test
 ```
 
 When `CYPRESS_RECORD_KEY` is not empty, cypress will be started with the `--record` option.
