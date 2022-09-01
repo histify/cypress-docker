@@ -6,6 +6,7 @@ It installs additional testing libraries:
 - @4tw/cypress-drag-drop
 - @testing-library/cypress
 - cypress-file-upload
+- cypress-network-idle
 - axios
 - luxon
 

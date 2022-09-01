@@ -5,7 +5,7 @@ RUN apt-get -y install gosu locales && \
     locale-gen
 
 WORKDIR /app
-RUN npm install @4tw/cypress-drag-drop @testing-library/cypress cypress-file-upload axios luxon
+RUN npm install @4tw/cypress-drag-drop @testing-library/cypress cypress-file-upload cypress-network-idle axios luxon
 
 RUN addgroup --system cypress \
     && adduser --system --ingroup cypress cypress
