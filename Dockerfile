@@ -1,4 +1,4 @@
-FROM cypress/included:10.7.0
+FROM cypress/included:11.1.0
 
 RUN apt-get -y install gosu locales && \
     sed -i '/de_CH.UTF-8/s/^# //g' /etc/locale.gen && \
