@@ -1,10 +1,17 @@
-FROM cypress/included:11.2.0
+FROM cypress/included:12.17.1
 
-RUN apt-get -y install gosu locales && \
-    sed -i '/de_CH.UTF-8/s/^# //g' /etc/locale.gen && \
+RUN set -eux; \
+    apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    locales \
+    gosu \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN sed -i '/de_CH.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen
-
+    
 WORKDIR /app
+
 RUN npm install \
     @4tw/cypress-drag-drop \
     @testing-library/cypress \
@@ -16,12 +23,13 @@ RUN npm install \
     axe-core
 
 RUN addgroup --system cypress \
-    && adduser --system --ingroup cypress cypress
-RUN mkdir -p /app/test
+    && adduser --system --ingroup cypress cypress \
+    && mkdir -p /app/test
+
 WORKDIR /app/test
 
+RUN echo 'LC_ALL=de_CH.UTF-8' | tee -a /etc/environment
 ENV CYPRESS_CI=1
-ENV LC_ALL="de_CH.UTF-8"
 ENV TZ=Europe/Zurich
 
 COPY entrypoint.sh /entrypoint.sh
