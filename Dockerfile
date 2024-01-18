@@ -1,4 +1,4 @@
-FROM cypress/included:12.17.1
+FROM cypress/included:13.6.3
 
 RUN set -eux; \
     apt-get update && apt-get install -y --no-install-recommends \
@@ -9,7 +9,7 @@ RUN set -eux; \
 
 RUN sed -i '/de_CH.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen
-    
+
 WORKDIR /app
 
 RUN npm install \
