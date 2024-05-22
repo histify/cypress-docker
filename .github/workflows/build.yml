@@ -1,0 +1,41 @@
+name: build
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "**"
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: login azurecr
+        uses: docker/login-action@v3
+        with:
+          registry: histify.azurecr.io
+          username: github-actions
+          password: ${{ secrets.AZURECR_TOKEN }}
+      - name: setup buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: remote
+          endpoint: tcp://buildkitd.buildx:1234
+      - name: prepare build metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: histify.azurecr.io/cypress
+          tags: |
+            type=edge
+            type=sha
+            type=ref,event=tag
+      - name: push
+        uses: docker/build-push-action@v5
+        with:
+          push: ${{ github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/') }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=histify.azurecr.io/cypress:cache
+          cache-to: type=registry,ref=histify.azurecr.io/cypress:cache
