@@ -39,3 +39,15 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=histify.azurecr.io/cypress:cache
           cache-to: type=registry,ref=histify.azurecr.io/cypress:cache
+
+  slack:
+    needs: [build]
+    if: "failure('build') && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))"
+    runs-on: self-hosted
+    steps:
+      - name: slack
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: '{"text": ":boom: ${{ github.repository }} <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|*build pipeline failed*> on `${{ github.ref_name }}`, by ${{ github.event.pusher.name }}; please fix :thanks:"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
