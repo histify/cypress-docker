@@ -29,6 +29,8 @@ RUN addgroup --system cypress \
 WORKDIR /app/test
 
 RUN echo 'LC_ALL=de_CH.UTF-8' | tee -a /etc/environment
+ENV LANG=de_CH.UTF-8
+ENV LC_ALL=de_CH.UTF-8
 ENV CYPRESS_CI=1
 ENV TZ=Europe/Zurich
 
