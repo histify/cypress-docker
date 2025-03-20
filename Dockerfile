@@ -1,4 +1,4 @@
-FROM cypress/included:14.2.0
+FROM cypress/included:12.17.4
 
 RUN set -eux; \
     apt-get update && apt-get install -y --no-install-recommends \
