@@ -12,5 +12,5 @@ chown cypress:cypress /app/test
 if [[ $# -eq 0 ]]; then
     gosu cypress cypress run -q $RECORD
 else
-    gosu cypress eval "$@"
+    gosu cypress $@
 fi
