@@ -1,4 +1,4 @@
-FROM cypress/included:13.10.0
+FROM cypress/included:13.17.0
 
 RUN set -eux; \
     apt-get update && apt-get install -y --no-install-recommends \
